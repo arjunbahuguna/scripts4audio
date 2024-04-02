@@ -27,9 +27,9 @@ total_files=$(find . -type f -name '*.wav' ! -path "./out/*" | wc -l)
 # Using find and xargs for parallel processing
 processed_files=0
 find . -type f -name '*.wav' ! -path "./out/*" | xargs -P4 -I{} bash -c '
-    file="$1"
-    log_file="$2"
-    total_files="$3"
+    file="{}"
+    log_file="$1"
+    total_files="$2"
     filename=$(basename "$file")
     # Generate a more unique identifier for the output filename
     hash=$(echo "$file" | md5sum | cut -f1 -d" ")
@@ -43,7 +43,7 @@ find . -type f -name '*.wav' ! -path "./out/*" | xargs -P4 -I{} bash -c '
     else
         echo "Failed to process $file" >>"$log_file"
     fi
-' bash "$log_file" "$total_files"
+' "$log_file" "$total_files"
 
 # Count processed files for a rough progress estimate
 processed_files=$(ls ./out | wc -l)
