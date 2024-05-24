@@ -1,4 +1,5 @@
 #!/bin/bash
+# Not meant for small datasets (<100GB)
 # Input: Wav files in current directory and subdirectories
 # Output: Wav files coverted to mono and resampled, and log file. 
 # Note: Files will be renamed and subdirectory structure will not be preserved, ie. all files will be put in single folder called "out"
