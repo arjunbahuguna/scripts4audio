@@ -18,6 +18,8 @@ for FILE in "$DIRECTORY"/*; do
 
     # If the mean volume is less than or equal to -40 dB, consider it as silent
     if (( $(echo "$MEAN_VOLUME <= -40" | bc -l) )); then
+      # Remove any double slashes from the file path
+      FILE=$(echo "$FILE" | sed 's|//|/|g')
       echo "$FILE" >> "$OUTPUT_FILE"
     fi
   fi
